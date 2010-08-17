@@ -7,7 +7,14 @@ require 'devise_cas_authenticatable/exceptions'
 
 require 'rubycas-client'
 
-module Devise
+require 'rails'
+
+module DeviseCasAuthenticatable
+  class Engine < Rails::Engine
+  end
+end
+
+module Devise  
   mattr_accessor :cas_base_url
   @@cas_base_url = nil
   
@@ -36,4 +43,5 @@ end
 Devise.add_module(:cas_authenticatable,
   :strategy => true,
   :controller => :cas_sessions,
+  :route => :cas,
   :model => 'devise_cas_authenticatable/model')

@@ -38,11 +38,11 @@ module Devise
       def login_url
         ::Devise.cas_client.add_service_to_login_url(service_url)
       end
-  
+      
       def read_ticket(params)
         ticket = params[:ticket]
         return nil unless ticket
-      
+              
         if ticket =~ /^PT-/
           ::CASClient::ProxyTicket.new(ticket, service_url, params[:renew])
         else

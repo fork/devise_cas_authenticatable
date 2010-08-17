@@ -1,10 +1,8 @@
 module Devise
   module Models
     module CasAuthenticatable
-      def self.included(base)
-        base.extend ClassMethods
-      end
-            
+      extend ActiveSupport::Concern
+      
       module ClassMethods
         def authenticate_with_cas_ticket(ticket)
           ::Devise.cas_client.validate_service_ticket(ticket) unless ticket.has_been_validated?
@@ -14,7 +12,7 @@ module Devise
             conditions = {:username => ticket.response.user}
             puts conditions.inspect
             
-            resource = find_for_cas_authentication(conditions)
+            resource = find_for_authentication(conditions)
             resource = new(conditions) if (resource.nil? and ::Devise.cas_create_user)
             return nil unless resource
             
@@ -24,7 +22,10 @@ module Devise
                 resource.cas_extra_attributes = ticket.response.extra_attributes
               end
               
-              create(conditions)
+              #create(conditions)
+							# fix extra attributes not beeing set on first login
+							resource.save
+							resource
             else
               if resource.respond_to? :cas_extra_attributes=
                 logger.debug "Updating existing user record"
@@ -38,11 +39,6 @@ module Devise
             logger.debug "Ticket is invalid"
             return nil
           end
-        end
-        
-        protected
-        def find_for_cas_authentication(conditions)
-          self.find(:first, :conditions => conditions)
         end
       end
     end
