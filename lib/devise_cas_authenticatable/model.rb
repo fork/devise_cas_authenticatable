@@ -20,7 +20,10 @@ module Devise
                 resource.cas_extra_attributes = ticket.response.extra_attributes
               end
               
-              create(conditions)
+              #create(conditions)
+							# fix extra attributes not beeing set on first login
+							resource.save
+							resource
             else
               if resource.respond_to? :cas_extra_attributes=
                 resource.cas_extra_attributes = ticket.response.extra_attributes
