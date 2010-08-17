@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
-    ".project",
+    ".gitignore",
+     ".project",
      "README.md",
      "Rakefile",
      "VERSION",
@@ -28,7 +29,6 @@ Gem::Specification.new do |s|
      "lib/devise_cas_authenticatable/routes.rb",
      "lib/devise_cas_authenticatable/schema.rb",
      "lib/devise_cas_authenticatable/strategy.rb",
-     "pkg/devise_cas_authenticatable-0.0.0.gem",
      "rails/init.rb"
   ]
   s.homepage = %q{http://github.com/fork/devise_cas_authenticatable}
