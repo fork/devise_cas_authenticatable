@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nat Budin", "rocknrolaf"]
-  s.date = %q{2010-08-17}
+  s.date = %q{2010-08-19}
   s.description = %q{CAS authentication module for Devise}
   s.email = %q{natbudin@gmail.com}
   s.extra_rdoc_files = [
